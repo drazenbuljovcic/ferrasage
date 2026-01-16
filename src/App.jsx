@@ -29,6 +29,20 @@ function App() {
     }
   };
 
+  const handleTouchMove = (e, index) => {
+    const touch = e.touches[0];
+    const rect = figureRefs.current[index]?.getBoundingClientRect();
+    if (rect && touch) {
+      const x = ((touch.clientX - rect.left) / rect.width) * 100;
+      const y = ((touch.clientY - rect.top) / rect.height) * 100;
+      setMousePositions((prev) => ({ ...prev, [index]: { x, y } }));
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setMousePositions({});
+  };
+
   const handleMouseLeave = () => {
     setMousePositions({});
   };
@@ -104,16 +118,16 @@ function App() {
             </div>
             <div className="hidden md:flex gap-8">
               <a
-                onClick={() => scrollToSection("services")}
-                className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
-              >
-                Services
-              </a>
-              <a
                 onClick={() => scrollToSection("expertise")}
                 className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
               >
                 Expertise
+              </a>
+              <a
+                onClick={() => scrollToSection("services")}
+                className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
+              >
+                Services
               </a>
               <a
                 onClick={() => scrollToSection("contact")}
@@ -200,7 +214,9 @@ function App() {
                   data-service={service.title}
                   onMouseMove={(e) => handleMouseMove(e, index)}
                   onMouseLeave={handleMouseLeave}
-                  className="p-8 bg-slate-800 border border-slate-700 rounded-2xl transition-all duration-300 group relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--color-primary)]/20 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:border-[var(--color-primary)]/50 hover:before:opacity-100 active:border-[var(--color-primary)]/50"
+                  onTouchMove={(e) => handleTouchMove(e, index)}
+                  onTouchEnd={handleTouchEnd}
+                  className="p-8 bg-slate-800 border border-slate-700 rounded-2xl transition-all duration-300 group relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--color-primary)]/20 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:border-[var(--color-primary)]/50 hover:before:opacity-100 active:border-[var(--color-primary)]/50 active:before:opacity-100"
                   style={{
                     "--mouse-x":
                       mousePositions[index]?.x !== undefined
@@ -213,19 +229,21 @@ function App() {
                   }}
                 >
                   <div
-                    className="absolute inset-0 opacity-0 transition-opacity duration-300 pointer-events-none"
+                    className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${
+                      mousePositions[index]?.x !== undefined ? "opacity-100" : "opacity-0"
+                    }`}
                     style={{
-                      background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(139, 92, 246, 0.15), transparent 40%)`,
+                      background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(152, 168, 105, 0.15), transparent 40%)`,
                     }}
                   />
                   <div className="relative z-10 select-none">
-                    <div className="select-none text-6xl mb-8 text-[var(--color-primary)] transition-transform duration-300 group-hover:scale-110 translate-x-1 group-hover:rotate-3">
+                    <div className="select-none text-6xl mb-8 text-[var(--color-primary)] transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3 group-active:scale-110 group-active:rotate-3">
                       {service.icon}
                     </div>
-                    <h3 className="text-xl font-semibold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--color-primary)]">
+                    <h3 className="text-xl font-semibold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--color-primary)] group-active:text-[var(--color-primary)]">
                       {service.title}
                     </h3>
-                    <p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300">
+                    <p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
                       {service.description}
                     </p>
                   </div>
