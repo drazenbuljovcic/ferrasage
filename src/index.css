@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 /*
@@ -14,7 +14,8 @@
   --color-primary-dark: #899a59;
   --text-shadow-glow: 0 0 20px rgba(152, 168, 105, 0.4);
   --text-shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.3);
-  --text-shadow-accent: 0 0 15px rgba(152, 168, 105, 0.3), 0 0 30px rgba(152, 168, 105, 0.1);
+  --text-shadow-accent:
+    0 0 15px rgba(152, 168, 105, 0.3), 0 0 30px rgba(152, 168, 105, 0.1);
 }
 
 @utility text-shadow {
@@ -41,4 +42,5 @@ body {
   font-weight: 400;
   font-style: normal;
   scroll-behavior: smooth;
+  @apply bg-slate-900;
 }

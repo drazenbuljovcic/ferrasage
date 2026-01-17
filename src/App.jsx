@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 function App() {
   const [formData, setFormData] = useState({
@@ -12,12 +12,43 @@ function App() {
   const fileInputRef = useRef(null);
   const figureRefs = useRef([]);
   const [mousePositions, setMousePositions] = useState({});
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const heroSectionRef = useRef(null);
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (heroSectionRef.current) {
+        const heroBottom =
+          heroSectionRef.current.offsetTop +
+          heroSectionRef.current.offsetHeight;
+        setShowScrollTop(window.scrollY > heroBottom);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const scrollToSection = useCallback((sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+  }, []);
+
+  const scrollToTop = useCallback(() => {
+    window.scroll({ top: 0, behavior: "smooth" });
   }, []);
 
   const handleMouseMove = (e, index) => {
@@ -136,12 +167,73 @@ function App() {
                 Contact
               </a>
             </div>
+            <button
+              onClick={toggleMobileMenu}
+              className="md:hidden text-white p-2"
+              aria-label="Toggle menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                {mobileMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M4 6h16M4 12h16M4 18h16"
+                  />
+                )}
+              </svg>
+            </button>
           </div>
+          {mobileMenuOpen && (
+            <div className="md:hidden bg-slate-900 border-t border-slate-800">
+              <div className="flex flex-col py-4 px-6 gap-4">
+                <a
+                  onClick={() => {
+                    scrollToSection("expertise");
+                    closeMobileMenu();
+                  }}
+                  className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
+                >
+                  Expertise
+                </a>
+                <a
+                  onClick={() => {
+                    scrollToSection("services");
+                    closeMobileMenu();
+                  }}
+                  className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
+                >
+                  Services
+                </a>
+                <a
+                  onClick={() => {
+                    scrollToSection("contact");
+                    closeMobileMenu();
+                  }}
+                  className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
+                >
+                  Contact
+                </a>
+              </div>
+            </div>
+          )}
         </nav>
       </header>
 
       <main className="mt-12">
-        <section className="pt-20 pb-20 px-6">
+        <section ref={heroSectionRef} className="pt-20 pb-20 px-6">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col">
               <div className="inline-block px-4 py-2 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-full text-sm font-medium mb-6 self-center">
@@ -230,7 +322,9 @@ function App() {
                 >
                   <div
                     className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${
-                      mousePositions[index]?.x !== undefined ? "opacity-100" : "opacity-0"
+                      mousePositions[index]?.x !== undefined
+                        ? "opacity-100"
+                        : "opacity-0"
                     }`}
                     style={{
                       background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(152, 168, 105, 0.15), transparent 40%)`,
@@ -405,6 +499,16 @@ function App() {
             </form>
           </div>
         </section>
+
+        {showScrollTop && (
+          <button
+            id="scroll-to-top"
+            onClick={scrollToTop}
+            className="cursor-pointer fixed right-3 bottom-3 px-3 py-1 bg-[var(--color-primary)] text-2xl text-center rounded-lg text-black text-bold"
+          >
+            ^
+          </button>
+        )}
       </main>
       <footer className="py-12 px-6 border-t border-slate-800">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
