@@ -40,16 +40,46 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollToSection = useCallback((sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+  const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
+
+  const smoothScroll = useCallback((targetY, duration = 800) => {
+    const startY = window.scrollY;
+    const distance = targetY - startY;
+    let startTime = null;
+
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeOutCubic(progress);
+      window.scrollTo(0, startY + distance * easedProgress);
+
+      if (progress < 1) {
+        requestAnimationFrame(animation);
+      }
+    };
+
+    requestAnimationFrame(animation);
   }, []);
 
+  const scrollToSection = useCallback(
+    (sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const headerHeight = 80;
+        const elementPosition =
+          element.getBoundingClientRect().top + window.scrollY;
+        const offsetPosition = elementPosition - headerHeight;
+
+        smoothScroll(offsetPosition);
+      }
+    },
+    [smoothScroll]
+  );
+
   const scrollToTop = useCallback(() => {
-    window.scroll({ top: 0, behavior: "smooth" });
-  }, []);
+    smoothScroll(0, 600);
+  }, [smoothScroll]);
 
   const handleMouseMove = (e, index) => {
     const rect = figureRefs.current[index]?.getBoundingClientRect();
