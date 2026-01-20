@@ -74,7 +74,7 @@ function App() {
         smoothScroll(offsetPosition);
       }
     },
-    [smoothScroll]
+    [smoothScroll],
   );
 
   const scrollToTop = useCallback(() => {
@@ -108,15 +108,6 @@ function App() {
     setMousePositions({});
   };
 
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files);
-    setAttachments((prev) => [...prev, ...files]);
-  };
-
-  const removeAttachment = (index) => {
-    setAttachments((prev) => prev.filter((_, i) => i !== index));
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
@@ -138,7 +129,52 @@ function App() {
     setTimeout(() => setSubmitted(false), 3000);
   };
 
+  const catchPhrases = [
+    { title: "Single-Minded", subtitle: "Execution" },
+    { title: "Multy-Industry", subtitle: "Insight" },
+  ];
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState(0);
+  const touchStartX = useRef(null);
+  const touchEndX = useRef(null);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhraseIndex((prev) => (prev + 1) % catchPhrases.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [catchPhrases.length]);
+
+  const handleTouchStartHero = (e) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchMoveHero = (e) => {
+    touchEndX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEndHero = () => {
+    if (touchStartX.current === null || touchEndX.current === null) return;
+    const diff = touchStartX.current - touchEndX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        setCurrentPhraseIndex((prev) => (prev + 1) % catchPhrases.length);
+      } else {
+        setCurrentPhraseIndex(
+          (prev) => (prev - 1 + catchPhrases.length) % catchPhrases.length,
+        );
+      }
+    }
+    touchStartX.current = null;
+    touchEndX.current = null;
+  };
+
   const services = [
+    {
+      icon: "📊",
+      title: "Technical Expertise",
+      description:
+        "Expert guidance on complex engineering problems, technology strategy, and technical due diligence.",
+    },
     {
       icon: "⚡",
       title: "Electrical Converters",
@@ -156,12 +192,6 @@ function App() {
       title: "Magneticism",
       description: "Transformers, Filters",
     },
-    {
-      icon: "📊",
-      title: "Technical Expertise",
-      description:
-        "Expert guidance on complex engineering problems, technology strategy, and technical due diligence.",
-    },
   ];
 
   return (
@@ -173,7 +203,7 @@ function App() {
               <a className="pointer" href="/">
                 <img src="logo-dark.svg" className="w-12 h-12 inline" />
                 <h1 className="text-2xl inline text-[var(--color-primary)]">
-                  FERRASAGEE
+                  FERRASAGE
                 </h1>
               </a>
             </div>
@@ -274,7 +304,8 @@ function App() {
                 <span className="text-[var(--color-primary)]">Engineering</span>
               </h1>
               <p className="text-xl text-slate-400 mb-8 leading-relaxed text-center bold">
-                Ferrasage, your reliable research partner and project leader.
+                From insight to impact, we partner with teams to deliver results
+                that scale.
               </p>
               <div className="flex gap-4">
                 <a
@@ -308,10 +339,33 @@ function App() {
                 <div className="text-slate-400">Years Experience</div>
               </div>
               <div className="absolute -top-6 -right-6 bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl">
-                <div className="text-3xl font-bold text-[var(--color-primary)] text-shadow-glow">
-                  200+
+                <div id="main-hero-catch">
+                  <div
+                    className="main-hero-catch-phrase"
+                    onTouchStart={handleTouchStartHero}
+                    onTouchMove={handleTouchMoveHero}
+                    onTouchEnd={handleTouchEndHero}
+                  >
+                    <div className="text-1xl font-bold text-[var(--color-primary)] text-shadow-glow">
+                      {catchPhrases[currentPhraseIndex].title}
+                    </div>
+                    <div className="text-1xl text-slate-400">
+                      {catchPhrases[currentPhraseIndex].subtitle}
+                    </div>
+                    <div className="flex justify-center gap-2 mt-2">
+                      {catchPhrases.map((_, index) => (
+                        <div
+                          key={index}
+                          className={`w-2 h-2 rounded-full transition-all ${
+                            index === currentPhraseIndex
+                              ? "bg-[var(--color-primary)]"
+                              : "bg-slate-600"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="text-slate-400">Projects Delivered</div>
               </div>
             </div>
           </div>
@@ -421,13 +475,21 @@ function App() {
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl font-bold text-white mb-4">
-                Konvergiraj
+                Direct it our way
               </h2>
-              <p className="text-xl text-slate-400">Šta te muči?</p>
+              {/* <p className="text-xl text-slate-400">Šta te muči?</p> */}
             </div>
+
+            {/* <a
+              className="max-w-xl mx-auto text-slate-500 transition-colors hover:text-red-400 active:text-red-400"
+              href="mailto:office@ferrasage.com"
+            >
+              🔗
+            </a> */}
+
             <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
               <div className="space-y-6">
-                <div>
+                {/* <div>
                   <label className=" block text-sm font-medium text-slate-300 mb-2 p-2">
                     Name
                   </label>
@@ -512,14 +574,17 @@ function App() {
                       </div>
                     )}
                   </div>
-                </div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-[var(--color-primary)] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[var(--color-primary)] hover:scale-[1.02] active:scale-[1.02]"
-                >
-                  {isSubmitting ? "Sending..." : "Send Inquiry"}
-                </button>
+                </div> */}
+
+                <a href="mailto:office@ferrasage.com" className="pointer">
+                  <button
+                    type="button"
+                    disabled={isSubmitting}
+                    className="w-full py-4 bg-[var(--color-primary)] text-white font-medium rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[var(--color-primary)] hover:scale-[1.02] active:scale-[1.02]"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Inquiry"} 🔗
+                  </button>
+                </a>
                 {submitted && (
                   <div className="p-4 bg-[var(--color-primary)]/10 text-[var(--color-primary)] rounded-lg text-center border border-[var(--color-primary)]/20">
                     Thank you. We'll be in touch shortly.
