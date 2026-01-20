@@ -173,7 +173,7 @@ function App() {
               <a className="pointer" href="/">
                 <img src="logo-dark.svg" className="w-12 h-12 inline" />
                 <h1 className="text-2xl inline text-[var(--color-primary)]">
-                  FERRASAGE
+                  FERRASAGEE
                 </h1>
               </a>
             </div>
