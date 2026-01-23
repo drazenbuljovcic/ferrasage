@@ -5,7 +5,7 @@ export function Services() {
     <section id="services" className="py-20 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <Headline size="4xl" underlined className="mb-8">
-          Naš Aprouč
+          Our approach
         </Headline>
         <div className="bg-slate-800 p-12 rounded-3xl border border-slate-700">
           <p className="text-xl text-slate-300 leading-relaxed mb-6">
