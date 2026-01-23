@@ -21,7 +21,7 @@ export function Headline({
         {children}
       </h2>
       {underlined && (
-        <div className="absolute -bottom-1 left-0 right-0 h-0.5 max-w-1/4 bg-[var(--color-primary)] rounded-full" />
+        <div className="absolute -bottom-1 left-0 right-0 h-0.5 max-w-1 bg-[var(--color-primary)] rounded-full" />
       )}
     </div>
   );

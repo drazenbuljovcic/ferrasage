@@ -7,7 +7,7 @@ export function EngineeringNote() {
         </p>
         <p className="text-2xl text-white font-light italic leading-relaxed">
           &quot;We don&apos;t just build products. We engineer solutions that
-          work—because the physics always has the final say.&quot; like share
+          work—because the physics always has the final say.&quot;
         </p>
       </div>
     </section>
