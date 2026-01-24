@@ -6,8 +6,9 @@ export function EngineeringNote() {
           Engineering Note
         </p>
         <p className="text-2xl text-white font-light italic leading-relaxed">
-          &quot;We don&apos;t just build products. We engineer solutions that
-          work—because the physics always has the final say.&quot;
+          We are engineers by practice and professionals by principle — hands‑on, accountable, 
+          and committed to deliver. When challenges arise, we engage directly, 
+          with respect for the technology, the craft, and the people behind it.
         </p>
       </div>
     </section>
