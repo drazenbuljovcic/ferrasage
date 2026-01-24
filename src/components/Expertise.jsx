@@ -12,13 +12,19 @@ const services = [
   {
     icon: '⚡',
     title: 'Electrical Converters',
-    description:
-      'Power systems design for reliable operation.'\n'Electronics, packaging and cooling included.',
+    description:[
+      'Power systems design for reliable operation.',
+      'Electronics, packaging and cooling included.',
+    ]
   },
   {
     icon: '🧲',
     title: 'Magnetics',
-    description: 'Tailored design and integration of' \n'Transformers'\n'Inductors'\n'EMI chokes',
+    description: [
+      'Tailored design and integration of',
+      'Transformers',
+      'Inductors',
+      'EMI chokes',]
   },
 ];
 
