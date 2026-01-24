@@ -11,12 +11,11 @@ export function Services() {
           <p className="text-xl text-slate-300 leading-relaxed mb-6">
             Ferrasage know's a way
           </p>
-          <p className="text-lg text-slate-400 leading-relaxed px-6 py-6">
+          <p className="text-lg text-slate-400 leading-relaxed mb-8 px-6 py-6">
             Ideas evolve, challenged by constraints, and reality tests every assumption.
             Through design work and research, prototyping, and production, we partner with
             entrepreneurs and enterprises to innovate and drive technology forward.
-          </p>
-          <p className="text-lg text-slate-400 leading-relaxed mb-8 px-6 py-6">
+            <br />
             Our experience spans industries and scales, allowing us to navigate complexity, 
             anticipate challenges, and turn ambition into solutions.
           </p>
