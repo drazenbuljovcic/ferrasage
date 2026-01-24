@@ -7,18 +7,18 @@ const services = [
     icon: '📊',
     title: 'Technical Expertise',
     description:
-      'Expert guidance on complex engineering problems, technology strategy, and technical due diligence.',
+      'Expert guidance on technology implementation and EMC in power electronics.',
   },
   {
     icon: '⚡',
     title: 'Electrical Converters',
     description:
-      'Circuit design, power systems, and electromagnetic solutions for industrial and commercial applications.',
+      'Power systems design for reliable operation. <br />Electronics, packaging and cooling included.',
   },
   {
     icon: '🧲',
-    title: 'Magneticism',
-    description: 'Transformers, Filters',
+    title: 'Magnetics',
+    description: 'Tailored design and integration of <br />Transformers<br />Inductors<br />EMI chokes',
   },
 ];
 
