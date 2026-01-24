@@ -91,9 +91,9 @@ export function Expertise() {
                   </p>
                 ))}
 
-                /*<p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
+                {/*<p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
                   {service.description}
-                </p>*/
+                </p>*/}
                 
               </div>
             </figure>
