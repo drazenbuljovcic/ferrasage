@@ -84,9 +84,17 @@ export function Expertise() {
                 <h3 className="text-xl font-semibold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--color-primary)] group-active:text-[var(--color-primary)]">
                   {service.title}
                 </h3>
-                <p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
+                
+                {service.description.map((line, i) => (
+                  <p key={i} className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
+                    {line}
+                  </p>
+                ))}
+
+                /*<p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
                   {service.description}
-                </p>
+                </p>*/
+                
               </div>
             </figure>
           ))}
