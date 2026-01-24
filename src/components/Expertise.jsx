@@ -7,7 +7,7 @@ const services = [
     icon: '📊',
     title: 'Technical Expertise',
     description:
-      'Expert guidance on technology implementation and EMC in power electronics.',
+      'Expert guidance on technology implementation and EMC in power electronics.'
   },
   {
     icon: '⚡',
