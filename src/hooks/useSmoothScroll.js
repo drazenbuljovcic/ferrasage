@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
 const easeOutCubic = (t) => 1 - Math.pow(1 - t, 3);
 
@@ -36,12 +36,9 @@ export function useSmoothScroll() {
     [smoothScroll],
   );
 
-  const scrollToTop = useCallback(
-    (duration = 600) => {
-      smoothScroll(0, duration);
-    },
-    [smoothScroll],
-  );
+  const scrollToTop = useCallback(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return { smoothScroll, scrollToSection, scrollToTop };
 }

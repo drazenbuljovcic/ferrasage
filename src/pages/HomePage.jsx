@@ -14,7 +14,7 @@ import { Analytics } from "@vercel/analytics/react";
 
 function HomePage() {
   const heroSectionRef = useRef(null);
-  const { scrollToSection, scrollToTop } = useSmoothScroll();
+  const { scrollToSection } = useSmoothScroll();
   const showScrollTop = useScrollPosition(heroSectionRef);
 
   return (
@@ -27,7 +27,7 @@ function HomePage() {
         <Services />
         <EngineeringNote />
         <Contact />
-        <ScrollToTop show={showScrollTop} onScrollToTop={scrollToTop} />
+        <ScrollToTop show={showScrollTop} />
       </main>
 
       <Footer />
