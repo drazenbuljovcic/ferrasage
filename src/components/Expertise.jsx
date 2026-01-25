@@ -1,30 +1,31 @@
-import { useRef } from 'react';
-import { useMousePosition } from '../hooks';
-import { Headline } from './Headline';
+import { useRef } from "react";
+import { useMousePosition } from "../hooks";
+import { Headline } from "./Headline";
 
 const services = [
   {
-    icon: '📊',
-    title: 'Technical Expertise',
+    icon: "📊",
+    title: "Technical Expertise",
     description:
-      'Expert guidance on technology implementation and EMC in power electronics.'
+      "Expert guidance on technology implementation and EMC in power electronics.",
   },
   {
-    icon: '⚡',
-    title: 'Electrical Converters',
-    description:[
-      'Power systems design for reliable operation. ',
-      'Electronics, packaging and cooling - key pillars of architecture compentence.'
-    ]
-  },
-  {
-    icon: '🧲',
-    title: 'Magnetics',
+    icon: "⚡",
+    title: "Electrical Converters",
     description: [
-      'Tailored design and integration of: ',
-      'Transformers, ',
-      'Inductors, ',
-      'EMI chokes.']
+      "Power systems design for reliable operation.",
+      "Electronics, packaging and cooling - key pillars of architecture compentence.",
+    ],
+  },
+  {
+    icon: "🧲",
+    title: "Magnetics",
+    description: [
+      "Tailored design and integration of: ",
+      "Transformers, ",
+      "Inductors, ",
+      "EMI chokes.",
+    ],
   },
 ];
 
@@ -51,27 +52,31 @@ export function Expertise() {
               ref={(el) => (figureRefs.current[index] = el)}
               data-servisable
               data-service={service.title}
-              onMouseMove={(e) => handleMouseMove(e, index, figureRefs.current[index])}
+              onMouseMove={(e) =>
+                handleMouseMove(e, index, figureRefs.current[index])
+              }
               onMouseLeave={handleReset}
-              onTouchMove={(e) => handleTouchMove(e, index, figureRefs.current[index])}
+              onTouchMove={(e) =>
+                handleTouchMove(e, index, figureRefs.current[index])
+              }
               onTouchEnd={handleReset}
               className="p-8 bg-slate-800 border border-slate-700 rounded-2xl transition-all duration-300 group relative overflow-hidden before:absolute before:inset-0 before:bg-gradient-to-br before:from-[var(--color-primary)]/20 before:to-transparent before:opacity-0 before:transition-opacity before:duration-300 hover:border-[var(--color-primary)]/50 hover:before:opacity-100 active:border-[var(--color-primary)]/50 active:before:opacity-100"
               style={{
-                '--mouse-x':
+                "--mouse-x":
                   mousePositions[index]?.x !== undefined
                     ? `${mousePositions[index].x}%`
-                    : '50%',
-                '--mouse-y':
+                    : "50%",
+                "--mouse-y":
                   mousePositions[index]?.y !== undefined
                     ? `${mousePositions[index].y}%`
-                    : '50%',
+                    : "50%",
               }}
             >
               <div
                 className={`absolute inset-0 transition-opacity duration-300 pointer-events-none ${
                   mousePositions[index]?.x !== undefined
-                    ? 'opacity-100'
-                    : 'opacity-0'
+                    ? "opacity-100"
+                    : "opacity-0"
                 }`}
                 style={{
                   background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(152, 168, 105, 0.15), transparent 40%)`,
@@ -84,7 +89,7 @@ export function Expertise() {
                 <h3 className="text-xl font-semibold text-white mb-3 transition-colors duration-300 group-hover:text-[var(--color-primary)] group-active:text-[var(--color-primary)]">
                   {service.title}
                 </h3>
-                
+
                 {/*service.description.map((line, i) => (
                   <p key={i} className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
                     {line}
@@ -92,9 +97,15 @@ export function Expertise() {
                 ))*/}
 
                 <p className="text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-300 group-active:text-slate-300">
-                  {service.description}
+                  {!Array.isArray(service.description)
+                    ? service.description
+                    : service.description.map((d) => (
+                        <>
+                          <span>{d}</span>
+                          <br />
+                        </>
+                      ))}
                 </p>
-                
               </div>
             </figure>
           ))}
