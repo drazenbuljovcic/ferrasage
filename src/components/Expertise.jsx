@@ -14,7 +14,7 @@ const services = [
     title: 'Electrical Converters',
     description:[
       'Power systems design for reliable operation. ',
-      'Electronics, packaging and cooling - key points of architecture compentence.'
+      'Electronics, packaging and cooling - key pillars of architecture compentence.'
     ]
   },
   {
