@@ -6,12 +6,14 @@ const services = [
   {
     icon: "📊",
     title: "Technical Expertise",
+    key: "Technical Expertise",
     description:
       "Expert guidance on technology implementation and EMC in power electronics.",
   },
   {
     icon: "⚡",
     title: "Electrical Converters",
+    key: "Electrical Converters",
     description: [
       "Power systems design for reliable operation.",
       "Electronics, packaging and cooling - key pillars of architecture compentence.",
@@ -20,6 +22,7 @@ const services = [
   {
     icon: "🧲",
     title: "Magnetics",
+    key: "Magnetics",
     description: [
       "Tailored design and integration of: ",
       "Transformers, ",
@@ -45,10 +48,11 @@ export function Expertise() {
             Deep technical capabilities across the engineering spectrum
           </p>
         </div>
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <figure
-              key={index}
+              key={service.key}
               ref={(el) => (figureRefs.current[index] = el)}
               data-servisable
               data-service={service.title}

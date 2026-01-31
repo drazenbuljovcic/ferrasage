@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export function Header({ onNavigate }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -30,19 +30,19 @@ export function Header({ onNavigate }) {
           </div>
           <div className="hidden md:flex gap-8">
             <a
-              onClick={() => handleNavClick('expertise')}
+              onClick={() => handleNavClick("expertise")}
               className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
             >
-              Expertise
+              Core Expertise
             </a>
             <a
-              onClick={() => handleNavClick('services')}
+              onClick={() => handleNavClick("services")}
               className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
             >
-              Services
+              Mindset
             </a>
             <a
-              onClick={() => handleNavClick('contact')}
+              onClick={() => handleNavClick("contact")}
               className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
             >
               Contact
@@ -81,19 +81,19 @@ export function Header({ onNavigate }) {
           <div className="md:hidden bg-slate-900 border-t border-slate-800">
             <div className="flex flex-col py-4 px-6 gap-4">
               <a
-                onClick={() => handleNavClick('expertise')}
+                onClick={() => handleNavClick("expertise")}
                 className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
               >
                 Expertise
               </a>
               <a
-                onClick={() => handleNavClick('services')}
+                onClick={() => handleNavClick("services")}
                 className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
               >
                 Services
               </a>
               <a
-                onClick={() => handleNavClick('contact')}
+                onClick={() => handleNavClick("contact")}
                 className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
               >
                 Contact
