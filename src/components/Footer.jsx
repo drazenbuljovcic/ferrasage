@@ -6,16 +6,10 @@ export function Footer() {
         <div className="text-slate-500">© 2025 Ferrasage. All rights reserved.</div>
         <div className="flex gap-6">
           <a
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            href="#"
             className="text-slate-500 transition-colors cursor-pointer hover:text-[var(--color-primary)] active:text-[var(--color-primary)]"
           >
             LinkedIn
-          </a>
-          <a
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="text-slate-500 transition-colors cursor-pointer hover:text-[var(--color-primary)] active:text-[var(--color-primary)]"
-          >
-            ResearchGate
           </a>
         </div>
       </div>
