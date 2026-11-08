@@ -1,12 +1,17 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Analytics } from "@vercel/analytics/react";
 
 import {
   Header,
   Hero,
   Expertise,
+  OurServices,
+  Product,
+  Founder,
   Services,
   Contact,
+  FindUs,
   Footer,
   ScrollToTop,
   EngineeringNote,
@@ -17,6 +22,13 @@ function HomePage() {
   const heroSectionRef = useRef(null);
   const { scrollToSection } = useSmoothScroll();
   const showScrollTop = useScrollPosition(heroSectionRef);
+  const location = useLocation();
+
+  // Arriving from another page with a target section (e.g. from the founder page).
+  useEffect(() => {
+    const id = location.state?.scrollTo;
+    if (id) setTimeout(() => scrollToSection(id), 50);
+  }, [location.state, scrollToSection]);
   return (
     <>
       <div className="min-h-screen bg-slate-900 text-slate-300">
@@ -24,10 +36,14 @@ function HomePage() {
 
         <main className="mt-12">
           <Hero ref={heroSectionRef} onNavigate={scrollToSection} />
+          <Founder />
+          <Product />
           <Expertise />
-          <Services />
-          <EngineeringNote />
+          <OurServices />
+          {/* <Services /> */}
+          {/* <EngineeringNote /> */}
           <Contact />
+          <FindUs />
           <ScrollToTop show={showScrollTop} />
         </main>
 

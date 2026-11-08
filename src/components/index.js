@@ -7,3 +7,8 @@ export { Footer } from './Footer';
 export { ScrollToTop } from './ScrollToTop';
 export { EngineeringNote } from './EngineeringNote';
 export { Headline } from './Headline';
+export { OurServices } from './OurServices';
+export { Product } from './Product';
+export { FindUs } from './FindUs';
+export { Founder } from './Founder';
+export { FounderAvatar } from './FounderAvatar';
