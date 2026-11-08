@@ -7,6 +7,11 @@ import { buildDevice } from "../three/buildDevice";
 // Overall model size (1 = original). 1.4 = 40% larger.
 const MODEL_SCALE = 1.4;
 
+// Default view: above the front-left corner, looking down so the band runs
+// diagonally with the logo reading top-down (~55° elevation, ~24° to the left
+// of straight-on, ~8 units away).
+const CAMERA_POSITION = [-1.87, 6.55, 4.19];
+
 export default function ProductScene() {
   const mountRef = useRef(null);
 
@@ -29,7 +34,7 @@ export default function ProductScene() {
     scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;
 
     const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
-    camera.position.set(1.1, 7.7, 3.4);
+    camera.position.set(...CAMERA_POSITION);
 
     const key = new THREE.DirectionalLight(0xffffff, 2.2);
     key.position.set(5, 8, 6);

@@ -8,10 +8,11 @@ import {
   Expertise,
   OurServices,
   Product,
+  InnovativeConcepts,
   Founder,
   Services,
   Contact,
-  FindUs,
+  Ntp,
   Footer,
   ScrollToTop,
   EngineeringNote,
@@ -38,12 +39,12 @@ function HomePage() {
           <Hero ref={heroSectionRef} onNavigate={scrollToSection} />
           <Founder />
           <Product />
+          <InnovativeConcepts />
           <Expertise />
           <OurServices />
           {/* <Services /> */}
           {/* <EngineeringNote /> */}
           <Contact />
-          <FindUs />
           <ScrollToTop show={showScrollTop} />
         </main>
 

@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
 import { FounderAvatar } from "./FounderAvatar";
+import { Section } from "./Section";
 import { FOUNDER } from "../data/founder";
 
-export function Founder() {
+export function Founder({ variant }) {
   return (
-    <section id="founder" data-id="founder" className="bg-slate-900 px-6 py-10">
+    <Section
+      variant={variant}
+      padding="sm"
+      id="founder"
+      data-id="founder"
+      className="bg-section-raised"
+    >
       <div
         data-id="founder-card"
         className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center md:flex-row md:text-left"
@@ -12,11 +19,13 @@ export function Founder() {
         <FounderAvatar className="h-[100px] w-[100px] shrink-0 border-2 text-3xl" />
 
         <div>
-          <p className="text-sm font-semibold uppercase tracking-widest text-[#8fa3c7]">
+          <p className="text-sm font-semibold uppercase tracking-widest text-section-eyebrow">
             Founder
           </p>
-          <h2 className="mt-1 text-2xl font-bold text-white">{FOUNDER.name}</h2>
-          <p className="mt-2 leading-relaxed text-slate-400">
+          <h2 tabIndex={0} className="mt-1 text-2xl font-bold text-section-heading">
+            {FOUNDER.name}
+          </h2>
+          <p className="mt-2 leading-relaxed text-section-muted">
             Built a career in power electronics, EMC and magnetic design, then
             founded Ferrasage to bring a system-level view to electrification
             architecture.
@@ -24,12 +33,12 @@ export function Founder() {
           <Link
             to="/daliborbuljovcic"
             data-id="founder-link"
-            className="mt-3 inline-block font-medium text-[var(--color-primary)] transition-colors hover:text-[var(--color-primary-light)]"
+            className="mt-3 inline-block font-medium text-section-accent transition-colors hover:text-section-accent-hover"
           >
             Meet the founder →
           </Link>
         </div>
       </div>
-    </section>
+    </Section>
   );
 }

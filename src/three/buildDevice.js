@@ -94,20 +94,36 @@ function topLabel() {
   const tex = canvasTexture(1400, 2250, (ctx, w, h) => {
     ctx.fillStyle = COLORS.band;
     ctx.fillRect(0, 0, w, h);
-    ctx.fillStyle = COLORS.label;
-    ctx.textAlign = "left";
-    ctx.textBaseline = "middle";
-    ctx.font = "800 120px Montserrat, sans-serif";
+    // The label runs along the band's long axis (canvas height = world Z),
+    // reading top-down from the back of the device toward the front, with
+    // the letter tops facing the +X housing. Everything is drawn in a
+    // rotated frame centred on the canvas.
+    const rotated = (draw) => {
+      ctx.save();
+      ctx.translate(w / 2, h / 2);
+      ctx.rotate(Math.PI / 2);
+      draw();
+      ctx.restore();
+    };
+
+    const size = 400; // logo mark
+    const gap = 14;
+    ctx.font = "800 210px Montserrat, sans-serif";
     const tw = ctx.measureText("FERRASAGE").width;
-    const x0 = (w - tw) / 2 + 140;
-    ctx.fillText("FERRASAGE", x0, h / 2);
+    const x0 = -(size + gap + tw) / 2 + size + gap; // text start, logo + text centred
+
+    rotated(() => {
+      ctx.fillStyle = COLORS.label;
+      ctx.textAlign = "left";
+      ctx.textBaseline = "middle";
+      ctx.fillText("FERRASAGE", x0, 0);
+    });
 
     // Brand mark: the real logo asset, drawn once it has loaded.
-    const size = 260;
     const img = new Image();
     img.width = img.height = size;
     img.onload = () => {
-      ctx.drawImage(img, x0 - size + 10, h / 2 - size / 2, size, size);
+      rotated(() => ctx.drawImage(img, x0 - size - gap, -size / 2, size, size));
       tex.needsUpdate = true;
     };
     img.src = "/logo-dark.svg";

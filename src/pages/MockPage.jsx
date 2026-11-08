@@ -20,7 +20,7 @@ function MockPage() {
           <p className="mb-4 text-lg font-semibold tracking-wide text-[#8fa3c7]">
             - Mock page -
           </p>
-          <h1 className="mb-6 text-4xl font-bold text-[var(--color-primary)] md:text-6xl">
+          <h1 tabIndex={0} className="mb-6 text-4xl font-bold text-[var(--color-primary)] md:text-6xl">
             Coming soon
           </h1>
           <p className="mb-10 max-w-xl text-lg text-slate-400">

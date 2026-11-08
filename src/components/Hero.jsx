@@ -1,4 +1,5 @@
 import { forwardRef, useEffect, useRef } from "react";
+import { Section } from "./Section";
 
 /*
   Accent lines, rotated 45deg ("/" direction), anchored at the upper-right
@@ -96,7 +97,7 @@ const lineScale = ({ phase, freq }, y) =>
 // Parallax speeds: fraction of scroll offset each layer drifts upward.
 const SPEEDS = { lines: 0.08, title: 0.28, tagline: 0.38 };
 
-export const Hero = forwardRef((_props, ref) => {
+export const Hero = forwardRef(({ variant }, ref) => {
   const layers = useRef({});
   const lineEls = useRef({});
 
@@ -139,11 +140,13 @@ export const Hero = forwardRef((_props, ref) => {
   };
 
   return (
-    <section
+    <Section
       ref={ref}
+      variant={variant}
+      padding="none"
       aria-label="Ferrasage"
       data-id="hero"
-      className="relative -mt-12 flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden bg-slate-900 px-6"
+      className="relative -mt-12 flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-6"
     >
       {/* Bottom glow, inspired by the Core Expertise cards */}
       <div
@@ -195,12 +198,15 @@ export const Hero = forwardRef((_props, ref) => {
         data-id="hero-content"
         className="relative z-10 flex flex-col items-center text-center"
       >
-        {/* Logo + wordmark on one line, like the header; sized by viewport */}
+        {/* Logo + wordmark on one line, like the header. One font-size drives
+            both: the wordmark inherits it and the mark is sized in em, so they
+            scale together. 10vw keeps the whole lockup (~8em wide) inside a
+            phone viewport; it caps at 8rem on desktop. */}
         <div
           ref={setLayer("title")}
           data-id="hero-brand"
           className="flex items-center justify-center gap-[0.2em] will-change-transform"
-          style={{ fontSize: "clamp(1.75rem, 8vw, 8rem)" }}
+          style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}
         >
           <img
             data-id="hero-logo-mark"
@@ -210,10 +216,10 @@ export const Hero = forwardRef((_props, ref) => {
             className="h-[1.3em] w-[1.3em] shrink-0 will-change-transform"
           />
 
-          <h1 data-id="hero-title" className="relative leading-none">
+          <h1 tabIndex={0} data-id="hero-title" className="relative leading-none">
             <span
               data-id="hero-wordmark"
-              className="block whitespace-nowrap font-bold tracking-tight text-[var(--color-primary)] text-shadow-glow text-9xl"
+              className="block whitespace-nowrap font-bold tracking-tight text-[var(--color-primary)] text-shadow-glow"
             >
               FERRASAGE
             </span>
@@ -226,10 +232,10 @@ export const Hero = forwardRef((_props, ref) => {
           data-id="hero-tagline"
           className="mt-8 text-lg font-semibold sm:text-xl md:mt-14 tracking-wide text-[#8fa3c7] will-change-transform md:text-3xl"
         >
-          - From insight to impact -
+          - From Insight to Impact -
         </p>
       </div>
-    </section>
+    </Section>
   );
 });
 

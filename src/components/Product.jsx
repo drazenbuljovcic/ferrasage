@@ -1,21 +1,25 @@
 import { lazy, Suspense } from "react";
+import { Section } from "./Section";
+import { ProductGallery } from "./ProductGallery";
 
 // three.js is loaded on demand so it doesn't weigh down the first paint.
 const ProductScene = lazy(() => import("./ProductScene"));
 
-export function Product() {
+export function Product({ variant }) {
   return (
-    <section
+    <Section
+      variant={variant}
+      padding="sm"
       id="product"
       data-id="product"
-      className="relative overflow-hidden bg-slate-900 px-6 py-10"
+      className="relative overflow-hidden"
     >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 bottom-0 h-1/2"
         style={{
           background:
-            "radial-gradient(ellipse 80% 100% at 50% 100%, rgba(152, 168, 105, 0.18), transparent 70%)",
+            "radial-gradient(ellipse 80% 100% at 50% 100%, color-mix(in srgb, var(--section-accent) 18%, transparent), transparent 70%)",
         }}
       />
       <div
@@ -25,22 +29,38 @@ export function Product() {
         <div data-id="product-text" className="text-center md:text-left">
           <p
             data-id="product-eyebrow"
-            className="mb-4 text-lg font-semibold tracking-wide text-[#8fa3c7]"
+            className="mb-3 text-sm font-semibold uppercase tracking-widest text-section-eyebrow"
           >
-            - Our Product -
+            Active Projects
           </p>
-          <h2
+
+          <h2 tabIndex={0}
             data-id="product-name"
-            className="mb-6 text-4xl font-bold leading-tight text-[var(--color-primary)] text-shadow-glow md:text-5xl lg:text-6xl"
+            className="text-2xl font-bold leading-tight text-section-accent text-shadow-glow md:text-3xl lg:text-4xl"
           >
-            Integrated Magnetics Unit
+            Planar Transformer with External Leakage Inductance
           </h2>
+
+          <ul
+            data-id="product-badges"
+            aria-label="Product status"
+            className="mt-4 flex flex-wrap justify-center gap-2 md:justify-start"
+          >
+            <li className="inline-flex items-center gap-2 rounded-full bg-section-accent px-3 py-1 text-xs font-semibold uppercase tracking-wider text-section-bg">
+              <span aria-hidden="true">★</span>
+              Flagship
+            </li>
+            <li className="inline-flex items-center gap-2 rounded-full border border-section-accent px-3 py-1 text-xs font-semibold uppercase tracking-wider text-section-accent">
+              <span aria-hidden="true">✓</span>
+              Shipped
+            </li>
+          </ul>
+
           <p
             data-id="product-subtext"
-            className="max-w-xl text-lg leading-relaxed text-slate-300 md:text-xl"
+            className="max-w-xl text-lg leading-relaxed text-section-text md:text-xl mt-4"
           >
-            Compact, robust power magnetics engineered for electrification
-            systems and independent energy infrastructure.
+            3.6kW 48V/800V 100kHz
           </p>
         </div>
 
@@ -51,7 +71,7 @@ export function Product() {
           >
             <Suspense
               fallback={
-                <div className="flex h-full items-center justify-center text-slate-500">
+                <div className="flex h-full items-center justify-center text-section-faint">
                   Loading 3D model…
                 </div>
               }
@@ -61,12 +81,16 @@ export function Product() {
           </div>
           <p
             data-id="product-hint"
-            className="mt-2 text-center text-sm text-slate-400"
+            className="mt-2 text-center text-sm text-section-muted"
           >
             Drag to rotate · scroll to zoom
           </p>
         </div>
       </div>
-    </section>
+
+      <div className="relative mx-auto mt-12 max-w-6xl">
+        <ProductGallery />
+      </div>
+    </Section>
   );
 }

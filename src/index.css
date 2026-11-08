@@ -36,6 +36,68 @@
   --color-primary-dark: #899a59;
 }
 
+/*
+  Section themes. <Section variant="..."> sets data-variant, which swaps these
+  tokens. :root carries the default values so components rendered outside a
+  Section (e.g. Headline on other pages) still look right.
+*/
+:root,
+[data-variant="default"] {
+  --section-bg: #0f172a;
+  --section-bg-raised: rgb(30 41 59 / 0.5);
+  --section-bg-subtle: rgb(30 41 59 / 0.3);
+  --section-heading: #ffffff;
+  --section-eyebrow: #8fa3c7;
+  --section-text: #cbd5e1;
+  --section-muted: #94a3b8;
+  --section-faint: #64748b;
+  --section-accent: #98a869;
+  --section-accent-hover: #a2b178;
+  --section-on-accent: #ffffff;
+  --section-surface: #1e293b;
+  --section-surface-2: #334155;
+  --section-border: #334155;
+  --section-divider: #475569;
+}
+
+[data-variant="black-white"] {
+  --section-bg: #ffffff;
+  --section-bg-raised: #f5f5f5;
+  --section-bg-subtle: #fafafa;
+  --section-heading: #000000;
+  --section-eyebrow: #737373;
+  --section-text: #404040;
+  --section-muted: #525252;
+  --section-faint: #737373;
+  --section-accent: #000000;
+  --section-accent-hover: #404040;
+  --section-on-accent: #ffffff;
+  --section-surface: #ffffff;
+  --section-surface-2: #e5e5e5;
+  --section-border: rgb(0 0 0 / 0.15);
+  --section-divider: rgb(0 0 0 / 0.3);
+  --text-shadow-glow: none;
+}
+
+/* Exposes the tokens as utilities: text-section-muted, bg-section-surface, … */
+@theme inline {
+  --color-section-bg: var(--section-bg);
+  --color-section-raised: var(--section-bg-raised);
+  --color-section-subtle: var(--section-bg-subtle);
+  --color-section-heading: var(--section-heading);
+  --color-section-eyebrow: var(--section-eyebrow);
+  --color-section-text: var(--section-text);
+  --color-section-muted: var(--section-muted);
+  --color-section-faint: var(--section-faint);
+  --color-section-accent: var(--section-accent);
+  --color-section-accent-hover: var(--section-accent-hover);
+  --color-section-on-accent: var(--section-on-accent);
+  --color-section-surface: var(--section-surface);
+  --color-section-surface-2: var(--section-surface-2);
+  --color-section-border: var(--section-border);
+  --color-section-divider: var(--section-divider);
+}
+
 body {
   font-family: "Montserrat", sans-serif;
   font-optical-sizing: auto;

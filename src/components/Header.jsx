@@ -23,7 +23,7 @@ export function Header({ onNavigate }) {
           <div className="text-2xl font-bold text-white">
             <a className="pointer" href="/">
               <img src="logo-dark.svg" className="w-12 h-12 inline" />
-              <h1 className="text-2xl inline text-[var(--color-primary)]">
+              <h1 tabIndex={0} className="text-2xl inline text-[var(--color-primary)]">
                 FERRASAGE
               </h1>
             </a>
