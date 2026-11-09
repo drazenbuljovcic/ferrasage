@@ -20,7 +20,7 @@ export function Product({ variant }) {
         }}
       />
 
-      <div className="mb-10 px-2 text-center md:mb-12">
+      <div className="mb-10 px-2 text-center md:mb-12 mt-4">
         <Headline size="4xl" underlined className="text-center">
           <span id="product-title">Active Projects</span>
         </Headline>
