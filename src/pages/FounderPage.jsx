@@ -7,6 +7,7 @@ import {
   FounderAvatar,
   Section,
   ContactIcons,
+  Contact,
 } from "../components";
 import { FOUNDER, PORTFOLIO } from "../data/founder";
 
@@ -169,6 +170,8 @@ function FounderPage() {
           ))}
 
           <Ntp variant="black-white" />
+
+          <Contact />
         </main>
 
         <Footer />
