@@ -1,10 +1,6 @@
-import { lazy, Suspense } from "react";
 import { Section } from "./Section";
-import { ProductGallery } from "./ProductGallery";
 import { Headline } from "./Headline";
-
-// three.js is loaded on demand so it doesn't weigh down the first paint.
-const ProductScene = lazy(() => import("./ProductScene"));
+import { Tag } from "./Tag";
 
 export function Product({ variant }) {
   return (
@@ -24,9 +20,9 @@ export function Product({ variant }) {
         }}
       />
 
-      <div className="text-center">
+      <div className="mb-10 px-2 text-center md:mb-12">
         <Headline size="4xl" underlined className="text-center">
-          <span id="innovative-concepts-title">Active Projects</span>
+          <span id="product-title">Active Projects</span>
         </Headline>
       </div>
 
@@ -59,46 +55,21 @@ export function Product({ variant }) {
               <span aria-hidden="true">★</span>
               Flagship
             </li>
-            <li className="inline-flex items-center gap-2 rounded-full border border-section-accent px-3 py-1 text-xs font-semibold uppercase tracking-wider text-section-accent">
-              <span aria-hidden="true">✓</span>
-              Shipped
+            <li>
+              <Tag variant="shipped" />
             </li>
           </ul>
-
-          <p
-            data-id="product-subtext"
-            className="max-w-xl text-lg leading-relaxed text-section-text md:text-xl mt-4"
-          >
-            3.6kW 48V/800V 100kHz
-          </p>
         </div>
 
-        <div data-id="product-model" className="min-w-0 w-full">
-          <div
-            data-id="product-viewer"
-            className="h-[360px] w-full md:h-[520px]"
-          >
-            <Suspense
-              fallback={
-                <div className="flex h-full items-center justify-center text-section-faint">
-                  Loading 3D model…
-                </div>
-              }
-            >
-              <ProductScene />
-            </Suspense>
-          </div>
-          <p
-            data-id="product-hint"
-            className="mt-2 text-center text-sm text-section-muted"
-          >
-            Drag to rotate · scroll to zoom
-          </p>
-        </div>
-      </div>
-
-      <div className="relative mx-auto mt-12 max-w-6xl">
-        <ProductGallery />
+        <figure data-id="product-image" className="min-w-0 w-full">
+          <img
+            src="/trafo.png"
+            alt="Ferrasage planar transformer in its black housing with green terminal covers"
+            width={1254}
+            height={1254}
+            className="mx-auto h-auto w-full max-w-md md:max-w-none"
+          />
+        </figure>
       </div>
     </Section>
   );

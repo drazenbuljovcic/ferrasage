@@ -6,6 +6,7 @@ import {
   Header,
   Hero,
   Expertise,
+  Partners,
   OurServices,
   Product,
   InnovativeConcepts,
@@ -37,6 +38,7 @@ function HomePage() {
           <Hero ref={heroSectionRef} onNavigate={scrollToSection} />
           <Founder />
           <Expertise />
+          <Partners />
           <Product />
           <InnovativeConcepts />
           <OurServices />

@@ -1,6 +1,7 @@
 export { Header } from "./Header";
 export { Hero } from "./Hero";
 export { Expertise } from "./Expertise";
+export { Partners } from "./Partners";
 export { Contact } from "./Contact";
 export { Footer } from "./Footer";
 export { ScrollToTop } from "./ScrollToTop";
@@ -13,6 +14,7 @@ export { FounderAvatar } from "./FounderAvatar";
 export { Section } from "./Section";
 export { ContactIcons } from "./ContactIcons";
 export { Figure } from "./Figure";
+export { Tag } from "./Tag";
 export { Gallery } from "./Gallery";
 export { InnovativeConcepts } from "./InnovativeConcepts";
 export { ProductGallery } from "./ProductGallery";

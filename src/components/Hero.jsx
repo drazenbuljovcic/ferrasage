@@ -146,7 +146,7 @@ export const Hero = forwardRef(({ variant }, ref) => {
       padding="none"
       aria-label="Ferrasage"
       data-id="hero"
-      className="relative -mt-12 flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-6"
+      className="relative -mt-12 flex min-h-screen min-h-[100svh] items-center justify-center overflow-hidden px-4 md:px-6"
     >
       {/* Bottom glow, inspired by the Core Expertise cards */}
       <div
@@ -171,7 +171,7 @@ export const Hero = forwardRef(({ variant }, ref) => {
         ref={setLayer("lines")}
         aria-hidden="true"
         data-id="hero-accent-lines"
-        className="pointer-events-none absolute inset-0 opacity-60 will-change-transform md:opacity-100"
+        className="pointer-events-none absolute inset-0 opacity-80 will-change-transform md:opacity-100"
       >
         {accentLines.map((line) => (
           <div
@@ -200,13 +200,12 @@ export const Hero = forwardRef(({ variant }, ref) => {
       >
         {/* Logo + wordmark on one line, like the header. One font-size drives
             both: the wordmark inherits it and the mark is sized in em, so they
-            scale together. 10vw keeps the whole lockup (~8em wide) inside a
-            phone viewport; it caps at 8rem on desktop. */}
+            scale together. On phones 11vw keeps the whole lockup (~8em wide)
+            inside the px-4 viewport; from md up it is 10vw, capped at 8rem. */}
         <div
           ref={setLayer("title")}
           data-id="hero-brand"
-          className="flex items-center justify-center gap-[0.2em] will-change-transform"
-          style={{ fontSize: "clamp(2rem, 10vw, 8rem)" }}
+          className="flex items-center justify-center gap-[0.2em] text-[clamp(2rem,11vw,8rem)] will-change-transform md:text-[clamp(2rem,10vw,8rem)]"
         >
           <img
             data-id="hero-logo-mark"
@@ -230,7 +229,7 @@ export const Hero = forwardRef(({ variant }, ref) => {
         <p
           ref={setLayer("tagline")}
           data-id="hero-tagline"
-          className="mt-8 text-lg font-semibold sm:text-xl md:mt-14 tracking-wide text-[#8fa3c7] will-change-transform md:text-3xl"
+          className="mt-10 text-xl font-semibold sm:text-2xl md:mt-14 tracking-wide text-[#8fa3c7] will-change-transform md:text-3xl"
         >
           - From Insight to Impact -
         </p>

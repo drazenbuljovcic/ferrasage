@@ -16,7 +16,7 @@ export function Figure({ caption, className = "", children, ...props }) {
     >
       {children}
       {caption && (
-        <figcaption className="px-3 py-2 text-sm text-section-muted">
+        <figcaption className="flex flex-wrap items-center gap-x-2 gap-y-1 px-3 py-2 text-sm text-section-muted">
           {caption}
         </figcaption>
       )}

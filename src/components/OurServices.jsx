@@ -43,7 +43,7 @@ export function OurServices({ variant }) {
       variant={variant}
       id="our-services"
       data-id="our-services"
-      className="m-6"
+      className="mx-0 mb-6 mt-0 py-5 !px-4 md:mx-6 md:!px-6"
     >
       <div className="mx-auto max-w-6xl text-center">
         <Headline size="4xl" underlined className="mb-16 ">
@@ -52,27 +52,32 @@ export function OurServices({ variant }) {
 
         <div
           data-id="our-services-columns"
-          className="grid gap-12 md:grid-cols-3 md:gap-0"
+          className="grid gap-12 lg:grid-cols-3 lg:gap-0"
         >
           {columns.map((col) => (
             <div
               key={col.key}
               data-id={`our-services-${col.key}`}
-              className="md:border-l md:border-dashed md:border-section-divider md:px-8 md:first:border-l-0 md:first:pl-0 md:last:pr-0"
+              className="min-w-0 lg:border-l lg:border-dashed lg:border-section-divider lg:px-6 lg:first:border-l-0 lg:first:pl-0 lg:last:pr-0 xl:px-8"
             >
-              <h3 tabIndex={0} className="mb-6 text-xl font-bold text-section-accent">
+              <h3
+                tabIndex={0}
+                className="mb-6 text-xl font-bold text-section-accent"
+              >
                 {col.title}
               </h3>
-              <ul className="space-y-5">
+              <ul className="mx-auto w-full max-w-sm space-y-4 text-left lg:mx-0 lg:max-w-none lg:space-y-5">
                 {col.items.map((item) => (
                   <li
                     key={item}
-                    className={`flex gap-3 leading-snug text-section-accent/90 ${
+                    className={`flex items-start gap-3 leading-snug text-section-accent/90 ${
                       col.italic ? "italic" : ""
                     }`}
                   >
-                    <span aria-hidden="true">•</span>
-                    <span>{item}</span>
+                    <span aria-hidden="true" className="shrink-0">
+                      •
+                    </span>
+                    <span className="min-w-0 text-balance">{item}</span>
                   </li>
                 ))}
               </ul>

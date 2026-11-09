@@ -7,7 +7,10 @@ import { Figure } from "./Figure";
  * and dots move below the main image as a row.
  *
  * @param {Object} props
- * @param {{src: string, alt: string, caption: string, width?: number, height?: number}[]} props.images
+ * @param {{src: string, alt: string, caption: React.ReactNode, captionText?: string, width?: number, height?: number}[]} props.images
+ *   `caption` may be any React node (e.g. a tag plus text). Because it can't be
+ *   read as a string, give a plain-text `captionText` for aria labels and the
+ *   live region; it falls back to `caption` when that is a string, else `alt`.
  * @param {string} [props.id] - base for data-id attributes (default "gallery")
  * @param {string} [props.label] - accessible name of the gallery (default "Image gallery")
  *
@@ -23,6 +26,8 @@ export function Gallery({ images, id = "gallery", label = "Image gallery" }) {
   const index = Math.min(active, images.length - 1);
   const current = images[index];
   const count = images.length;
+  const textOf = (img) =>
+    img.captionText ?? (typeof img.caption === "string" ? img.caption : img.alt);
 
   const select = (i, focus = false) => {
     setActive(i);
@@ -65,7 +70,7 @@ export function Gallery({ images, id = "gallery", label = "Image gallery" }) {
               ref={(el) => (thumbRefs.current[i] = el)}
               onClick={() => select(i)}
               tabIndex={i === index ? 0 : -1}
-              aria-label={`Image ${i + 1} of ${count}: ${img.caption}`}
+              aria-label={`Image ${i + 1} of ${count}: ${textOf(img)}`}
               aria-pressed={i === index}
               className={`block aspect-square w-full overflow-hidden border-2 transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-section-accent ${
                 i === index
@@ -105,7 +110,7 @@ export function Gallery({ images, id = "gallery", label = "Image gallery" }) {
       </div>
 
       <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">
-        {`Image ${index + 1} of ${count}: ${current.caption}`}
+        {`Image ${index + 1} of ${count}: ${textOf(current)}`}
       </p>
 
       <Figure

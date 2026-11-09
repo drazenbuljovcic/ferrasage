@@ -17,7 +17,13 @@ export function Expertise({ variant }) {
   const hasMouse = mouse?.x !== undefined;
 
   return (
-    <Section variant={variant} tone="raised" id="expertise" data-id="expertise">
+    <Section
+      variant={variant}
+      tone="raised"
+      id="expertise"
+      data-id="expertise"
+      className="py-5"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <Headline size="4xl" underlined className="mb-4">

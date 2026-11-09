@@ -6,7 +6,7 @@ export function Footer() {
         <div className="text-slate-500">© 2025 Ferrasage</div>
         <div className="flex gap-6">
           <a
-            href="#"
+            href="https://www.linkedin.com/company/ferrasage/"
             className="text-slate-500 transition-colors cursor-pointer hover:text-[var(--color-primary)] active:text-[var(--color-primary)]"
           >
             LinkedIn

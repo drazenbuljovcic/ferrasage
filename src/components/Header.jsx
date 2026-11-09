@@ -8,7 +8,7 @@ const SCROLL_ITEMS = [
   { id: "expertise", label: "Core Expertise" },
   { id: "product", label: "Active Projects" },
   { id: "innovative-concepts", label: "Innovative Concepts" },
-  { id: "our-services", label: "Mindset" },
+  { id: "our-services", label: "Our Services" },
   { id: "contact", label: "Contact" },
 ];
 
@@ -37,6 +37,16 @@ export function Header({ onNavigate, showScrollItems = true }) {
     const pad = mobile ? " py-2" : "";
     return (
       <>
+        {showScrollItems &&
+          SCROLL_ITEMS.map(({ id, label }) => (
+            <a
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className={`${LINK_CLASS}${pad}`}
+            >
+              {label}
+            </a>
+          ))}
         <Link
           to={FOUNDER_PATH}
           onClick={closeMobileMenu}
@@ -49,21 +59,6 @@ export function Header({ onNavigate, showScrollItems = true }) {
         >
           Founder
         </Link>
-        {showScrollItems ? (
-          SCROLL_ITEMS.map(({ id, label }) => (
-            <a
-              key={id}
-              onClick={() => handleNavClick(id)}
-              className={`${LINK_CLASS}${pad}`}
-            >
-              {label}
-            </a>
-          ))
-        ) : (
-          <Link to="/" onClick={closeMobileMenu} className={`${LINK_CLASS}${pad}`}>
-            Home
-          </Link>
-        )}
       </>
     );
   };
@@ -75,14 +70,15 @@ export function Header({ onNavigate, showScrollItems = true }) {
           <div className="text-2xl font-bold text-white">
             <a className="pointer" href="/">
               <img src="logo-dark.svg" className="w-12 h-12 inline" />
-              <h1 tabIndex={0} className="text-2xl inline text-[var(--color-primary)]">
+              <h1
+                tabIndex={0}
+                className="text-2xl inline text-[var(--color-primary)]"
+              >
                 FERRASAGE
               </h1>
             </a>
           </div>
-          <div className="hidden md:flex gap-8">
-            {navLinks(false)}
-          </div>
+          <div className="hidden md:flex gap-8">{navLinks(false)}</div>
           <button
             onClick={toggleMobileMenu}
             className="md:hidden text-white p-2"

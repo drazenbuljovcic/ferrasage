@@ -22,7 +22,10 @@ export function Founder({ variant }) {
           <p className="text-sm font-semibold uppercase tracking-widest text-section-eyebrow">
             Founder
           </p>
-          <h2 tabIndex={0} className="mt-1 text-2xl font-bold text-section-heading">
+          <h2
+            tabIndex={0}
+            className="mt-1 text-2xl font-bold text-section-heading"
+          >
             {FOUNDER.name}
           </h2>
           <p className="mt-2 leading-relaxed text-section-muted">
@@ -31,11 +34,11 @@ export function Founder({ variant }) {
             architecture.
           </p>
           <Link
-            to="/daliborbuljovcic"
+            to="/founder"
             data-id="founder-link"
             className="mt-3 inline-block font-medium text-section-accent transition-colors hover:text-section-accent-hover"
           >
-            Meet the founder →
+            Check Portfolio →
           </Link>
         </div>
       </div>
