@@ -15,13 +15,14 @@ export function Headline({
 
   return (
     <div className={`relative inline-block ${className}`}>
-      <h2 tabIndex={0}
+      <h2
+        tabIndex={0}
         className={`font-bold text-section-heading ${sizeClasses[size]} ${underlined ? "pb-2" : ""}`}
       >
         {children}
       </h2>
       {underlined && (
-        <div className="absolute -bottom-1 left-1/4 right-1/4 h-0.5 max-w-1/2 bg-section-accent rounded-full" />
+        <div className="absolute -bottom-1 left-1/4 right-1/4 h-0.5 max-w-200 bg-section-accent rounded-full" />
       )}
     </div>
   );

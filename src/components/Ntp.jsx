@@ -21,6 +21,20 @@ export function Ntp({ variant }) {
           </h2>
         </div>
 
+        <figure
+          data-id="ntp-image"
+          className="mx-auto mb-10 max-w-md overflow-hidden rounded-2xl border border-section-border"
+        >
+          <img
+            src="/ntp.jpg"
+            alt="Science and Technology Park Novi Sad building"
+            width={1200}
+            height={1600}
+            loading="lazy"
+            className="h-auto w-full object-cover"
+          />
+        </figure>
+
         <div className="grid md:grid-cols-2 gap-10 items-center">
           {/* <address
             data-id="ntp-address"

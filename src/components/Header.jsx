@@ -1,6 +1,23 @@
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-export function Header({ onNavigate }) {
+const FOUNDER_PATH = "/daliborbuljovcic";
+
+// Scroll targets on the home page (section ids).
+const SCROLL_ITEMS = [
+  { id: "expertise", label: "Core Expertise" },
+  { id: "product", label: "Active Projects" },
+  { id: "innovative-concepts", label: "Innovative Concepts" },
+  { id: "our-services", label: "Mindset" },
+  { id: "contact", label: "Contact" },
+];
+
+const LINK_CLASS =
+  "cursor-pointer transition-colors hover:text-[var(--color-primary)]";
+
+export function Header({ onNavigate, showScrollItems = true }) {
+  const { pathname } = useLocation();
+  const founderActive = pathname === FOUNDER_PATH;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -16,6 +33,41 @@ export function Header({ onNavigate }) {
     closeMobileMenu();
   };
 
+  const navLinks = (mobile) => {
+    const pad = mobile ? " py-2" : "";
+    return (
+      <>
+        <Link
+          to={FOUNDER_PATH}
+          onClick={closeMobileMenu}
+          aria-current={founderActive ? "page" : undefined}
+          className={`${LINK_CLASS}${pad} ${
+            founderActive
+              ? "text-[var(--color-primary)] underline underline-offset-8 decoration-2"
+              : ""
+          }`}
+        >
+          Founder
+        </Link>
+        {showScrollItems ? (
+          SCROLL_ITEMS.map(({ id, label }) => (
+            <a
+              key={id}
+              onClick={() => handleNavClick(id)}
+              className={`${LINK_CLASS}${pad}`}
+            >
+              {label}
+            </a>
+          ))
+        ) : (
+          <Link to="/" onClick={closeMobileMenu} className={`${LINK_CLASS}${pad}`}>
+            Home
+          </Link>
+        )}
+      </>
+    );
+  };
+
   return (
     <header>
       <nav className="fixed top-0 left-0 right-0 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 z-50">
@@ -29,24 +81,7 @@ export function Header({ onNavigate }) {
             </a>
           </div>
           <div className="hidden md:flex gap-8">
-            <a
-              onClick={() => handleNavClick("expertise")}
-              className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
-            >
-              Core Expertise
-            </a>
-            <a
-              onClick={() => handleNavClick("services")}
-              className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
-            >
-              Mindset
-            </a>
-            <a
-              onClick={() => handleNavClick("contact")}
-              className="cursor-pointer transition-colors hover:text-[var(--color-primary)] hover:active:text-[var(--color-primary)]"
-            >
-              Contact
-            </a>
+            {navLinks(false)}
           </div>
           <button
             onClick={toggleMobileMenu}
@@ -80,24 +115,7 @@ export function Header({ onNavigate }) {
         {mobileMenuOpen && (
           <div className="md:hidden bg-slate-900 border-t border-slate-800">
             <div className="flex flex-col py-4 px-6 gap-4">
-              <a
-                onClick={() => handleNavClick("expertise")}
-                className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
-              >
-                Expertise
-              </a>
-              <a
-                onClick={() => handleNavClick("services")}
-                className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
-              >
-                Services
-              </a>
-              <a
-                onClick={() => handleNavClick("contact")}
-                className="cursor-pointer transition-colors hover:text-[var(--color-primary)] py-2"
-              >
-                Contact
-              </a>
+              {navLinks(true)}
             </div>
           </div>
         )}

@@ -128,7 +128,7 @@ export const PORTFOLIO = [
   },
   {
     id: "system",
-    label: "System",
+    label: "System's Engineering",
     projects: [
       {
         id: "booster-pump-controller",

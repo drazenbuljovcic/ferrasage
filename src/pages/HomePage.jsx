@@ -10,12 +10,10 @@ import {
   Product,
   InnovativeConcepts,
   Founder,
-  Services,
   Contact,
   Ntp,
   Footer,
   ScrollToTop,
-  EngineeringNote,
 } from "../components";
 import { useSmoothScroll, useScrollPosition } from "../hooks";
 
@@ -38,12 +36,10 @@ function HomePage() {
         <main className="mt-12">
           <Hero ref={heroSectionRef} onNavigate={scrollToSection} />
           <Founder />
+          <Expertise />
           <Product />
           <InnovativeConcepts />
-          <Expertise />
           <OurServices />
-          {/* <Services /> */}
-          {/* <EngineeringNote /> */}
           <Contact />
           <ScrollToTop show={showScrollTop} />
         </main>
