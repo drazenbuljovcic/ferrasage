@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Section } from "./Section";
 
 const PARTNERS = [
@@ -14,6 +15,9 @@ const PARTNERS = [
   { name: "Volicorp", src: "/logos-volicorp.png", className: "h-14 md:h-20" },
 ];
 
+// Constant scroll speed in px/s, so mobile and desktop feel the same.
+const SPEED = 70;
+
 // One set of logos, repeated so a single group is wider than most screens.
 const REPEATS = 2;
 
@@ -29,10 +33,10 @@ function LogoGroup({ hidden }) {
             <img
               src={p.src}
               alt={hidden ? "" : p.name}
-              loading="lazy"
+              loading="eager"
+              decoding="async"
               draggable="false"
-              // brightness(0) + invert(1) turns every logo solid white, whatever its original colour.
-              className={`w-auto select-none opacity-70 transition-opacity hover:opacity-100 [filter:brightness(0)_invert(1)] ${p.className}`}
+              className={`w-auto select-none ${p.className}`}
             />
           </li>
         )),
@@ -47,6 +51,38 @@ function LogoGroup({ hidden }) {
  * that makes the loop seamless. Motion stops for reduced-motion users.
  */
 export function Partners({ variant = "default" }) {
+  const trackRef = useRef(null);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    let cancelled = false;
+
+    const measure = () => {
+      const w = el.firstElementChild?.offsetWidth;
+      if (w) el.style.setProperty("--marquee-duration", `${w / SPEED}s`);
+    };
+
+    // Start only once every logo has loaded and decoded, so widths are final
+    // (no jump or flash from late layout shifts).
+    const imgs = [...el.querySelectorAll("img")];
+    Promise.all(
+      imgs.map((img) => img.decode().catch(() => {})),
+    ).then(() => {
+      if (cancelled) return;
+      measure();
+      setReady(true);
+    });
+
+    const ro = new ResizeObserver(measure);
+    ro.observe(el.firstElementChild);
+    return () => {
+      cancelled = true;
+      ro.disconnect();
+    };
+  }, []);
+
   return (
     <Section
       variant={variant}
@@ -66,9 +102,15 @@ export function Partners({ variant = "default" }) {
 
       <div
         data-id="partners-track"
-        className="group overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]"
+        className="group overflow-hidden [-webkit-mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)] [mask-image:linear-gradient(to_right,transparent,#000_10%,#000_90%,transparent)]"
       >
-        <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused] motion-reduce:animate-none">
+        {/* Filter lives on the moving layer (one composite) rather than on every image. brightness(0) + invert(1) turns each logo solid white. */}
+        <div
+          ref={trackRef}
+          className={`flex w-max transition-opacity duration-500 [filter:brightness(0)_invert(1)] will-change-transform hover:opacity-100 group-hover:[animation-play-state:paused] motion-reduce:animate-none ${
+            ready ? "animate-marquee opacity-70" : "opacity-0"
+          }`}
+        >
           <LogoGroup />
           <LogoGroup hidden />
         </div>
