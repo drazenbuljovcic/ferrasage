@@ -46,7 +46,7 @@ function HomePage() {
           <ScrollToTop show={showScrollTop} />
         </main>
 
-        <Footer />
+        <Footer showFounderLink />
 
         <Analytics />
       </div>
